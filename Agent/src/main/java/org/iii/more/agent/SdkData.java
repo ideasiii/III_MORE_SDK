@@ -1,5 +1,7 @@
 package org.iii.more.agent;
 
+import org.iii.more.common.Logs;
+
 import java.util.HashMap;
 
 /**
@@ -65,7 +67,7 @@ public class SdkData
     {
         for (Object key : sdkItems.keySet())
         {
-            System.out.println(key + " : " + sdkItems.get((String) key).toString());
+            Logs.showTrace(key + " : " + sdkItems.get((String) key).toString());
         }
     }
 }

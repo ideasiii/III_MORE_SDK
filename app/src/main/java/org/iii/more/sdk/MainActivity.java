@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity
         
         // Example of a call to a native method
         TextView tv = (TextView) findViewById(R.id.textViewMsg);
-        tv.setText(stringFromJNI());
+        //tv.setText(stringFromJNI());
         
         Button btnAgentSync = (Button) findViewById(R.id.buttonAgentSync);
         btnAgentSync.setOnClickListener(new View.OnClickListener()
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                Agent.syncData();
+                Agent.syncData("suck me");
             }
         });
     }

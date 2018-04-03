@@ -4,7 +4,7 @@ package org.iii.more.restapiclient;
  * Created by Jugo on 2018/1/25
  */
 
-public abstract class Config
+public abstract class HttpConfig
 {
     static final String ENCODING = "UTF-8";
     static final int TIME_OUT_CONNECT = 15000;

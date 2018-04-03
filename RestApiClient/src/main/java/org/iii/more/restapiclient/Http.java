@@ -25,8 +25,7 @@ abstract class Http
         eventListener = listener;
     }
     
-    static void POST(final String httpsURL, final Config.HTTP_DATA_TYPE http_data_type, final
-    HashMap<String, String> parameters, Response response)
+    static void POST(final String httpsURL, final HttpConfig.HTTP_DATA_TYPE http_data_type, final HashMap<String, String> parameters, Response response)
     {
         JSONObject jsonResponse = new JSONObject();
         
@@ -35,13 +34,12 @@ abstract class Http
             jsonResponse.put("id", response.Id);
             jsonResponse.put("code", -1);
             String strParameter = getPostDataString(parameters);
-            Logs.showTrace("[Http] POST : URL=" + httpsURL + " Data Type=" + http_data_type
-                    .toString() + " Parameter:" + strParameter);
+            Logs.showTrace("[Http] POST : URL=" + httpsURL + " Data Type=" + http_data_type.toString() + " Parameter:" + strParameter);
             URL url = new URL(httpsURL);
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             con.setRequestMethod("POST");
-            con.setConnectTimeout(Config.TIME_OUT_CONNECT);
-            con.setReadTimeout(Config.TIME_OUT_READ);
+            con.setConnectTimeout(HttpConfig.TIME_OUT_CONNECT);
+            con.setReadTimeout(HttpConfig.TIME_OUT_READ);
             con.setRequestProperty("Content-length", String.valueOf(strParameter.length()));
             con.setRequestProperty("Content-Type", http_data_type.toString());
             con.setRequestProperty("Cache-Control", "no-cache");
@@ -80,11 +78,10 @@ abstract class Http
             eventListener.onEvent(jsonResponse);
         }
         
-        Logs.showTrace("[Http] POST Response: " + jsonResponse.toString());
+        Logs.showTrace("[Http] POST Response: " + jsonResponse);
     }
     
-    private static String getPostDataString(HashMap<String, String> params)
-            throws UnsupportedEncodingException
+    private static String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
         boolean first = true;
@@ -99,9 +96,9 @@ abstract class Http
                 result.append('&');
             }
             
-            result.append(URLEncoder.encode(entry.getKey(), Config.ENCODING));
+            result.append(URLEncoder.encode(entry.getKey(), HttpConfig.ENCODING));
             result.append('=');
-            result.append(URLEncoder.encode(entry.getValue(), Config.ENCODING));
+            result.append(URLEncoder.encode(entry.getValue(), HttpConfig.ENCODING));
         }
         
         return result.toString();

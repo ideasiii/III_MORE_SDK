@@ -25,7 +25,7 @@ public class RestApiClient
         return "RestApiClient";
     }
     
-    public int HttpsPost(final String httpsURL, final Config.HTTP_DATA_TYPE http_data_type, final
+    public int HttpsPost(final String httpsURL, final HttpConfig.HTTP_DATA_TYPE http_data_type, final
     HashMap<String, String> parameters, Response response)
     {
         response.Id = ++msnSerialNUm;
@@ -35,7 +35,7 @@ public class RestApiClient
         return response.Id;
     }
     
-    public int HttpPost(final String httpsURL, final Config.HTTP_DATA_TYPE http_data_type, final
+    public int HttpPost(final String httpsURL, final HttpConfig.HTTP_DATA_TYPE http_data_type, final
     HashMap<String, String> parameters, Response response)
     {
         response.Id = ++msnSerialNUm;
@@ -49,11 +49,11 @@ public class RestApiClient
     private class HttpsPostRunnable implements Runnable
     {
         private String mstrHttpsURL;
-        private Config.HTTP_DATA_TYPE mHttp_data_type;
+        private HttpConfig.HTTP_DATA_TYPE mHttp_data_type;
         private HashMap<String, String> mParameters;
         private Response mResponse;
         
-        HttpsPostRunnable(final String httpsURL, final Config.HTTP_DATA_TYPE http_data_type,
+        HttpsPostRunnable(final String httpsURL, final HttpConfig.HTTP_DATA_TYPE http_data_type,
                 final HashMap<String, String> parameters, Response response)
         {
             mstrHttpsURL = httpsURL;
@@ -73,11 +73,11 @@ public class RestApiClient
     private class HttpPostRunnable implements Runnable
     {
         private String mstrHttpsURL;
-        private Config.HTTP_DATA_TYPE mHttp_data_type;
+        private HttpConfig.HTTP_DATA_TYPE mHttp_data_type;
         private HashMap<String, String> mParameters;
         private Response mResponse;
         
-        HttpPostRunnable(final String httpsURL, final Config.HTTP_DATA_TYPE http_data_type,
+        HttpPostRunnable(final String httpsURL, final HttpConfig.HTTP_DATA_TYPE http_data_type,
                 final HashMap<String, String> parameters, Response response)
         {
             mstrHttpsURL = httpsURL;
