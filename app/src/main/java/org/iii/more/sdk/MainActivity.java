@@ -7,9 +7,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.iii.more.agent.Agent;
+import org.iii.more.common.Logs;
 
 public class MainActivity extends AppCompatActivity
 {
+    public static TextView tv = null;
     
     // Used to load the 'native-lib' library on application startup.
     static
@@ -27,13 +29,22 @@ public class MainActivity extends AppCompatActivity
         TextView tv = (TextView) findViewById(R.id.textViewMsg);
         //tv.setText(stringFromJNI());
         
-        Button btnAgentSync = (Button) findViewById(R.id.buttonAgentSync);
-        btnAgentSync.setOnClickListener(new View.OnClickListener()
+        findViewById(R.id.buttonAgentSync).setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
                 Agent.syncData("suck me");
+            }
+        });
+        
+        findViewById(R.id.buttonGetSdkAuth).setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Logs.showTrace("[MainActivity] buttonGetSdkAuth");
+                Agent.isAuth("03");
             }
         });
     }

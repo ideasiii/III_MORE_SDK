@@ -22,4 +22,13 @@
         android:text="Agent Sync"
         tools:layout_editor_absoluteX="16dp"/>
 
+    <Button
+        android:id="@+id/buttonGetSdkAuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="116dp"
+        android:text="Get Auth"/>
+
 </RelativeLayout>

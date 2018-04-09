@@ -1,6 +1,7 @@
 package org.iii.more.agent;
 
 import org.iii.more.common.Logs;
+import org.iii.more.common.Type;
 
 import java.util.HashMap;
 
@@ -10,19 +11,19 @@ import java.util.HashMap;
 
 public class SdkData
 {
-    private class Item
+    public static class SdkItem
     {
         public String ID;
         public String Name;
         public String Version;
         public boolean isAuthorization;
         
-        public Item()
+        public SdkItem()
         {
             isAuthorization = false;
         }
         
-        public Item(String strId, String strName, String strVersion, boolean bAuth)
+        public SdkItem(String strId, String strName, String strVersion, boolean bAuth)
         {
             ID = strId;
             Name = strName;
@@ -37,14 +38,14 @@ public class SdkData
         
     }
     
-    private HashMap<String, Item> sdkItems = null;
+    private HashMap<String, SdkItem> sdkItems = null;
     
     public SdkData()
     {
-        sdkItems = new HashMap<String, Item>();
+        sdkItems = new HashMap<String, SdkItem>();
     }
     
-    public void addItem(String strId, Item item)
+    public void addItem(String strId, SdkItem item)
     {
         if (null == sdkItems)
         {
@@ -60,7 +61,7 @@ public class SdkData
             return;
         }
         
-        sdkItems.put(strId, new Item(strId, strName, strVersion, bAuth));
+        sdkItems.put(strId, new SdkItem(strId, strName, strVersion, bAuth));
     }
     
     public void printData()
@@ -70,4 +71,26 @@ public class SdkData
             Logs.showTrace(key + " : " + sdkItems.get((String) key).toString());
         }
     }
+    
+    public int size()
+    {
+        return sdkItems.size();
+    }
+    
+    public int getSdkItem(final String strSdkId, SdkItem sdkItem)
+    {
+        SdkItem item = sdkItems.get(strSdkId);
+        if (null != item)
+        {
+            sdkItem.ID = item.ID;
+            sdkItem.Name = item.Name;
+            sdkItem.isAuthorization = item.isAuthorization;
+            sdkItem.Version = item.Version;
+            return Type.SUCCESS;
+        }
+        
+        Logs.showTrace("[SdkData] getSdkItem SDK id: " + strSdkId + " is invalid");
+        return Type.FAIL;
+    }
+    
 }

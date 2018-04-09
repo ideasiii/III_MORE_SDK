@@ -11,6 +11,7 @@ package org.iii.more.agent;
 
 import org.iii.more.common.Config;
 import org.iii.more.common.Logs;
+import org.iii.more.common.Type;
 import org.iii.more.restapiclient.HttpConfig;
 import org.iii.more.restapiclient.Response;
 import org.iii.more.restapiclient.RestApiClient;
@@ -56,6 +57,7 @@ public abstract class Agent
                             {
                                 JSONObject jsonData = new JSONObject(jsonObject.getString("data"));
                                 Logs.showTrace("[Agent] onResponse Data: " + jsonData);
+                                
                                 if (!jsonData.isNull("sdks") && !jsonData.isNull("app_id"))
                                 {
                                     String strAppId = jsonData.getString("app_id");
@@ -81,4 +83,19 @@ public abstract class Agent
             }
         }
     };
+    
+    public static boolean isAuth(final String strSdkId)
+    {
+        if (null != sdkData && 0 < sdkData.size())
+        {
+            SdkData.SdkItem sdkItem = new SdkData.SdkItem();
+            if (Type.SUCCESS == sdkData.getSdkItem(strSdkId, sdkItem))
+            {
+                Logs.showTrace("[Agent] isAuth SDK id: " + sdkItem.ID + " isAuth: " + sdkItem.isAuthorization);
+                return true;
+            }
+        }
+        Logs.showTrace("[Agent] isAuth invalid SDK Data");
+        return false;
+    }
 }
